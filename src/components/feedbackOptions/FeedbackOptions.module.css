@@ -1,0 +1,23 @@
+button {
+  background-color: #6495EDFF;
+  border: none;
+  padding: 10px 30px;
+  color: white;
+  font-size: 16px;
+  align-items: center;
+  cursor: pointer;
+}
+
+button:not(:last-child) {
+  margin-right: 10px;
+}
+
+button:focus,
+button:hover {
+  background-color: #4c82ee;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+}
