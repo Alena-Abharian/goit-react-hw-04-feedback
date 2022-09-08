@@ -5,26 +5,35 @@ import Section from './section';
 import Notification from './notification';
 
 const App = () => {
-  const [state, setState] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  });
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const handleClickBtn = (e) => {
-    const { name } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: prevState[name] + 1 }));
+    switch (e.target.name) {
+      case 'good':
+        setGood(good + 1);
+        break;
+
+      case 'neutral':
+        setNeutral(neutral + 1);
+        break;
+
+      case 'bad':
+        setBad(bad + 1);
+        break;
+    }
   };
 
   const countTotalFeedback = () => {
-    return state.good + state.neutral + state.bad;
+    return good + neutral + bad;
   };
 
   const countPositiveFeedbackPercentage = () => {
     if (countTotalFeedback() === 0) {
       return 0;
     }
-    return Math.round((state.good / countTotalFeedback()) * 100);
+    return Math.round((good / countTotalFeedback()) * 100);
   };
 
   return (
@@ -48,9 +57,9 @@ const App = () => {
             <Notification message='There is no feedback' />
           ) :
           (<Statistics
-            good={state.good}
-            neutral={state.neutral}
-            bad={state.bad}
+            good={good}
+            neutral={neutral}
+            bad={bad}
             total={countTotalFeedback()}
             positivePercentage={countPositiveFeedbackPercentage()}
           />)}
